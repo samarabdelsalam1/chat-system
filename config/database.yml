@@ -1,0 +1,20 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV.fetch("DEVELOPMENT_DB_USERNAME") %>
+  password: <%= ENV.fetch("DEVELOPMENT_DB_PASSWORD") %>
+  host: <%= ENV.fetch("DEVELOPMENT_DB_HOST") %>
+  port: <%= ENV.fetch("DB_PORT") { 3306 } %>
+
+development:
+  <<: *default
+  database: <%= ENV.fetch("DEVELOPMENT_DB_NAME") %>
+  host: chat-system_development_db
+
+test:
+  <<: *default
+  database: <%= ENV.fetch("TEST_DB_NAME") %>
+  username: <%= ENV.fetch("TEST_DB_USERNAME") %>
+  password: <%= ENV.fetch("TEST_DB_PASSWORD") %>
+  host: chat-system_test_db
