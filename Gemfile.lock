@@ -113,6 +113,7 @@ GEM
       activesupport (> 3)
       elasticsearch (~> 8)
       hashie
+    elasticsearch-rails (8.0.0)
     erubi (1.13.1)
     faraday (2.12.2)
       faraday-net_http (>= 2.0, < 3.5)
@@ -315,6 +316,7 @@ DEPENDENCIES
   capybara
   debug
   elasticsearch-model
+  elasticsearch-rails
   importmap-rails
   jbuilder
   mysql2 (~> 0.5.6)

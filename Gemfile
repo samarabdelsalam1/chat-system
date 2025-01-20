@@ -37,6 +37,7 @@ gem 'sidekiq'
 gem 'mysql2', '~> 0.5.6'
 
 gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
