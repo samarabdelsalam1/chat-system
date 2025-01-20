@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount Rswag::Ui::Engine => '/api-docs'
+  mount Rswag::Api::Engine => '/api-docs'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -11,7 +13,12 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  resource :application, only: [:index, :show, :create]
-  resource :chat, only: [:index, :show, :create]  
-  resource :message, only: [:index, :show, :create]  
+  namespace :api do
+    namespace :v1 do
+      resources :applications, only: [:index, :show, :create]
+      resources :chats, only: [:index, :show, :create]  
+      resources :messages, only: [:index, :show, :create]  
+    end
+  end
+ 
 end

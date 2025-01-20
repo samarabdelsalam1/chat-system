@@ -38,6 +38,10 @@ gem 'mysql2', '~> 0.5.6'
 
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
+gem 'rswag'
+gem "rswag-api", "~> 2.9"
+gem "rswag-ui", "~> 2.9"
+gem 'rswag-specs'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -45,6 +49,9 @@ group :development, :test do
 
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem "brakeman", require: false
+  gem 'rspec-rails' 
+  gem 'factory_bot_rails'
+  gem 'ffaker'
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false

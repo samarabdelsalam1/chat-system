@@ -1,4 +1,4 @@
-class ChatsController < ApplicationController
+class Api::V1::ChatsController < Api::V1::ApplicationController
     before_action :set_application
     
       def index
