@@ -7,15 +7,12 @@ class ChatsController < ApplicationController
     end
   
     def create
-      chat_number = @application.chats_count + 1
-      chat = @application.chats.new(number: chat_number)
-  
-      if chat.save
-        @application.increment!(:chats_count)
-        render json: chat.as_json(except: :id), status: :created
-      else
-        render json: { errors: chat.errors.full_messages }, status: :unprocessable_entity
-      end
+      application = Application.find_by(token: params[:application_token]) 
+      return render json: { error: 'Application not found' }, status: :not_found unless application
+      
+      next_chat_number = Redis.current.incr("application:#{application.id}:next_chat_number")
+      ChatCreationJob.perform_async(next_chat_number, application.id)
+      render json: { message_number: next_message_number }, status: :created
     end
   
     private
