@@ -1,0 +1,31 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/applications":
+    get:
+      summary: show application
+      responses:
+        '200':
+          description: successful
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Test Application 
+      responses:
+        '201':
+          description: Application created successfully
+        '422':
+          description: Validation errors occurred             
+servers:
+- url: http://localhost:3000
+  description: "Chat System API V1"
