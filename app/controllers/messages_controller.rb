@@ -9,17 +9,18 @@ class MessagesController < ApplicationController
   
     # POST /applications/:application_token/chats/:chat_number/messages
     def create
-      message_number = @chat.messages_count + 1
-      message = @chat.messages.new(number: message_number, body: message_params[:body])
-  
-      # instead of the saving the messages directely, send it to a backgroud job to write it to the databse
-      # idea: we might temporaya save it to redis database for an hour.
-      # also we need to save it to elasticsearch for the search endpoint. 
-      if message.save
-        @chat.increment!(:messages_count)
-        render json: JsonSerializer.serialize(message), status: :created
-      else
-        render json: { errors: message.errors.full_messages }, status: :unprocessable_entity
+      if message_params[:body].blank?
+        render json: { error: 'Message body cannot be blank' }, status: :unprocessable_entity
+        return
+      end
+      if @chat.nil?
+        render json: { error: 'Chat not found' }, status: :not_found
+        return
+      end
+        next_message_number = Redis.current.incr("chat:#{@chat.id}:next_message_number")
+        MessageCreationJob.perform_later(@chat.id, message_number, message_params[:body])
+        
+        render json: { message_number: message, chat_number: @chat.number, body: body}, status: :accepted
       end
     end
   
