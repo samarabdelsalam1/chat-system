@@ -15,10 +15,11 @@ Rails.application.routes.draw do
   # root "posts#index"
   namespace :api do
     namespace :v1 do
-      resources :applications, only: [:index, :show, :create]
-      resources :chats, only: [:index, :show, :create]  
-      resources :messages, only: [:index, :show, :create]  
+      resources :applications, only: [:index, :show, :create], param: :token do
+        resources :chats, only: [:index, :show, :create], param: :number do
+          resources :messages, only: [:index, :show, :create]  
+        end  
+      end
     end
   end
- 
 end
