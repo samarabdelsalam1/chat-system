@@ -36,8 +36,9 @@ gem 'sidekiq'
 
 gem 'mysql2', '~> 0.5.6'
 
-gem 'elasticsearch-model'
-gem 'elasticsearch-rails'
+gem 'searchkick'
+gem 'elasticsearch', '~> 7.14'
+gem 'faraday'
 gem 'rswag'
 gem "rswag-api", "~> 2.9"
 gem "rswag-ui", "~> 2.9"

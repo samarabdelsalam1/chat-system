@@ -4,7 +4,7 @@ class Api::V1::MessagesController < Api::V1::ApplicationController
   # GET /applications/:application_token/chats/:chat_number/messages
   def index
     messages = @chat.messages
-    render json: JsonSerializer.serialize(messages), status: :ok
+    render json: messages.as_json, status: :ok
   end
 
   # POST /applications/:application_token/chats/:chat_number/messages
@@ -20,6 +20,25 @@ class Api::V1::MessagesController < Api::V1::ApplicationController
     render json: { message_number: next_message_number, chat_number: @chat.number, body: message_params[:body] }, status: :accepted
   end
 
+  def search
+    if params[:query].blank?
+      render json: { error: 'Query parameter is required' }, status: :unprocessable_entity
+      return
+    end
+    results = Message.search(
+                      params[:query],
+                      fields: [:body],
+                      where: {chat_number: @chat.number, token: @application.token},
+                      match: :text_middle,
+                    )
+    filtered_results = results.map do |message|
+      message.as_json.except('id', 'chat_id')
+    end  
+    render json: filtered_results, status: :ok
+  end
+  
+  
+
   private
 
   # Set the chat based on application token and chat number
@@ -29,7 +48,6 @@ class Api::V1::MessagesController < Api::V1::ApplicationController
       render json: { error: "Application not found" }, status: :not_found
       return
     end
-
     @chat = @application.chats.find_by(number: params[:chat_number])
     render json: { error: "Chat not found" }, status: :not_found unless @chat
   end

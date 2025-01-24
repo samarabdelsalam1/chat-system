@@ -7,10 +7,15 @@ paths:
   "/api/v1/applications":
     get:
       summary: Show application
+      tags: 
+        - Application
       responses:
         '200':
           description: Successful
     post:
+      summary: Creat new application
+      tags: 
+        - Application
       requestBody:
         required: true
         content:
@@ -29,6 +34,8 @@ paths:
   "/api/v1/applications/{token}/chats":
     get:
       summary: "List chats for a specific application"
+      tags: 
+        - Chat
       parameters:
         - in: path
           name: token
@@ -56,6 +63,8 @@ paths:
           description: "Application not found"
     post:
       summary: "Create new Chat"
+      tags: 
+        - Chat
       parameters:
         - in: path
           name: token
@@ -84,6 +93,8 @@ paths:
   "/api/v1/applications/{token}/chats/{number}/messages":
     post:
       summary: "Create new message"
+      tags:
+        - Message
       parameters:
         - in: path
           name: token
@@ -112,6 +123,50 @@ paths:
           description: "Message created successfully"
         '404':
           description: "Chat or application not found"
+  "/api/v1/applications/{token}/chats/{number}/messages/search":
+    get:
+      summary: "Search messages for a specific chat"
+      tags: 
+        - Message
+      parameters:
+        - in: path
+          name: token
+          required: true
+          schema:
+            type: string
+          description: "Token of the application"
+        - in: path
+          name: number
+          required: true
+          schema:
+            type: integer
+          description: "Chat number"
+        - in: query
+          name: query
+          required: true
+          schema:
+            type: string
+          description: "Search query for message bodies"
+      responses:
+        '200':
+          description: "Search results"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    number:
+                      type: integer
+                      description: "Message number"
+                    body:
+                      type: string
+                      description: "Message body"
+        '404':
+          description: "Application or chat not found"
+        '422':
+          description: "Validation error (e.g., missing query)"
 
 servers:
   - url: http://localhost:3000

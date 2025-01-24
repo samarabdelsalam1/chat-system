@@ -3,7 +3,7 @@ class Api::V1::ChatsController < Api::V1::ApplicationController
     
     def index
       chats = @application.chats
-      render json: chats.as_json(except: :id), status: :ok
+      render json: chats.as_json(:except => [:id, :application_id]), status: :ok
     end
   
     def create
