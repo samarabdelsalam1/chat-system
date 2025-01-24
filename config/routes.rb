@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   # root "posts#index"
   namespace :api do
     namespace :v1 do
-      resources :applications, only: [:index, :show, :create], param: :token do
+      resources :applications, only: [:index, :show, :create, :update], param: :token do
         resources :chats, only: [:index, :show, :create], param: :number do
           resources :messages, only: [:create]  
           get "messages/search", to: "messages#search"
