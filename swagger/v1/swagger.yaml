@@ -31,6 +31,34 @@ paths:
           description: Application created successfully
         '422':
           description: Validation errors occurred
+  "/api/v1/applications/{token}":
+    patch:
+      summary: "Update application"
+      tags: 
+        - Application
+      parameters:
+        - in: path
+          name: token
+          required: true
+          schema:
+            type: string
+          description: "Token of the application"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "Application name"    
+      responses: 
+        '200':
+          description: Application updated successfully
+        '422':
+          description: Validation errors occurred
+
   "/api/v1/applications/{token}/chats":
     get:
       summary: "List chats for a specific application"
