@@ -118,6 +118,8 @@ paths:
                   number:
                     type: integer
                     description: "Chat number"
+        '404':
+          description: "Application not found"
   "/api/v1/applications/{token}/chats/{number}/messages":
     post:
       summary: "Create new message"
@@ -194,7 +196,7 @@ paths:
         '404':
           description: "Application or chat not found"
         '422':
-          description: "Validation error (e.g., missing query)"
+          description: "Validation error"
 
 servers:
   - url: http://localhost:3000
