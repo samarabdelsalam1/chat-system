@@ -26,7 +26,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     vim \
     nodejs \
     yarn \
-    gnupg \
     tzdata \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 # Create application user and set up directories

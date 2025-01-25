@@ -12,10 +12,8 @@ services:
     env_file: .env
     volumes:
       - .:/home/chat-system-user/chat-system
-      - ~/.gnupg:/home/chat-system-user/.gnupg
       - bundle:/bundle
       - rails_cache:/home/chat-system-user/chat-system/tmp/cache
-      - ~/.gitconfig:/etc/gitconfig
     tmpfs:
       - /tmp/chat-system
     ports:
