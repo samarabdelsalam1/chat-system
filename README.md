@@ -24,7 +24,7 @@ If you haven't already, you can install [Docker](https://www.docker.com/get-star
    The application requires a specific Docker network for communication between services. Create it by running:
    
  ```sh
-   docker create network chat-system_private_network
+    docker network create chat-system_private_network
   ```
 2. **Build and start the containers**: 
 
