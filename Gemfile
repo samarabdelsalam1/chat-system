@@ -32,17 +32,14 @@ gem "bootsnap", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
-gem 'sidekiq'
+gem 'sidekiq', '7.3.7'
 
 gem 'mysql2', '~> 0.5.6'
 
-gem 'searchkick'
+gem 'searchkick','5.4.0'
 gem 'elasticsearch', '~> 7.14'
-gem 'faraday'
-gem 'rswag'
-gem "rswag-api", "~> 2.9"
-gem "rswag-ui", "~> 2.9"
-gem 'rswag-specs'
+gem 'faraday', '2.12.2'
+gem 'rswag', '2.16.0'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -50,9 +47,9 @@ group :development, :test do
 
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem "brakeman", require: false
-  gem 'rspec-rails' 
-  gem 'factory_bot_rails'
-  gem 'ffaker'
+  gem 'rspec-rails', '7.1.0'
+  gem 'factory_bot_rails', '6.4.4'
+  gem 'ffaker', '2.23.0'
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
@@ -65,7 +62,7 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
-  gem "selenium-webdriver"
-  gem "shoulda-matchers"
+  gem "capybara", '3.40.0'
+  gem "selenium-webdriver", '4.27.0'
+  gem "shoulda-matchers", '6.4.0'
 end
