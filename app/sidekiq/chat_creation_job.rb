@@ -1,6 +1,8 @@
 class ChatCreationJob
   include Sidekiq::Job
 
+  queue_as :chat_creation
+  
   def perform(chat_number, application_id)
     application = Application.find(application_id)
     application.chats.create!(number: chat_number)
