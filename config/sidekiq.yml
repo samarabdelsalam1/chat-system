@@ -1,0 +1,11 @@
+:scheduler:
+  :schedule:
+    update_chats_count_job:
+      cron: "0 * * * *" 
+      class: ChatsCounterUpdaterJob
+      queue: chat
+
+    update_messages_count_job:
+      cron: "0 * * * *" 
+      class: MessagesCounterUpdaterJob
+      queue: message
